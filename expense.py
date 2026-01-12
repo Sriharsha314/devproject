@@ -1,13 +1,8 @@
-# Expense Tracker System - Mini Project
+# Expense Tracker System - Jenkins Compatible Version
 
 expenses = []
 
-def add_expense():
-    date = input("Enter date (DD-MM-YYYY): ")
-    category = input("Enter category (Food/Travel/Shopping/etc): ")
-    amount = float(input("Enter amount: "))
-    note = input("Enter note (optional): ")
-
+def add_expense(date, category, amount, note=""):
     expense = {
         "date": date,
         "category": category,
@@ -19,46 +14,36 @@ def add_expense():
 
 def view_expenses():
     if not expenses:
-        print(" No expenses recorded.")
+        print("No expenses recorded.")
         return
 
-    print("\n ALL EXPENSES")
+    print("\nALL EXPENSES")
     for e in expenses:
         print(f"{e['date']} | {e['category']} | ₹{e['amount']} | {e['note']}")
 
 def total_expense():
     total = sum(e["amount"] for e in expenses)
-    print(" Total Expense: ₹", total)
+    print("\nTotal Expense: ₹", total)
 
 def category_summary():
     summary = {}
     for e in expenses:
         summary[e["category"]] = summary.get(e["category"], 0) + e["amount"]
 
-    print("\n CATEGORY-WISE SUMMARY")
+    print("\nCATEGORY-WISE SUMMARY")
     for cat, amt in summary.items():
         print(f"{cat}: ₹{amt}")
 
-while True:
-    print("\n===== EXPENSE TRACKER =====")
-    print("1. Add Expense")
-    print("2. View Expenses")
-    print("3. Total Expense")
-    print("4. Category Summary")
-    print("5. Exit")
+# --------- AUTO EXECUTION FOR JENKINS ---------
 
-    choice = input("Enter choice (1-5): ")
+print("===== EXPENSE TRACKER (JENKINS MODE) =====")
 
-    if choice == "1":
-        add_expense()
-    elif choice == "2":
-        view_expenses()
-    elif choice == "3":
-        total_expense()
-    elif choice == "4":
-        category_summary()
-    elif choice == "5":
-        print("Exiting Expense Tracker.")
-        break
-    else:
-        print(" Invalid choice.")
+add_expense("10-01-2026", "Food", 250, "Lunch")
+add_expense("11-01-2026", "Travel", 120, "Bus fare")
+add_expense("12-01-2026", "Shopping", 500, "Groceries")
+
+view_expenses()
+total_expense()
+category_summary()
+
+print("\nExpense Tracker execution completed successfully.")
