@@ -19,11 +19,11 @@ def view_expenses():
 
     print("\nALL EXPENSES")
     for e in expenses:
-        print(f"{e['date']} | {e['category']} | ₹{e['amount']} | {e['note']}")
+        print(f"{e['date']} | {e['category']} | Rs.{e['amount']} | {e['note']}")
 
 def total_expense():
     total = sum(e["amount"] for e in expenses)
-    print("\nTotal Expense: ₹", total)
+    print("\nTotal Expense: Rs.", total)
 
 def category_summary():
     summary = {}
@@ -32,7 +32,7 @@ def category_summary():
 
     print("\nCATEGORY-WISE SUMMARY")
     for cat, amt in summary.items():
-        print(f"{cat}: ₹{amt}")
+        print(f"{cat}: Rs.{amt}")
 
 # --------- AUTO EXECUTION FOR JENKINS ---------
 
